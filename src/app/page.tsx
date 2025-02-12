@@ -36,47 +36,36 @@ export default function Home() {
 
   return (
     <div className="px-4 space-y-4">
-
       <div className="flex items-center justify-end space-x-2">
         <Search className="w-6 h-6" />
         <Input
           className="w-50"
-          placeholder="Search to State in Brazil"
+          placeholder="Search for a State in Brazil"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
 
-      <div className="flex items-center justify-center">
-        {search.length > 0 ? (
-          <>
-            {filteredStates.map(state => {
-              return (
-                <>
-                  <Table className="w-full">
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead className="w-[150px]">State</TableHead>
-                        <TableHead>Sigle</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      <TableRow>
-                        <TableCell className="font-medium">{state.nome}</TableCell>
-                        <TableCell>{state.sigla}</TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-                </>
-              )
-            })}
-          </>
-        ) : (
-          []
-        )}
-      </div>
-
-
-    </div >
+      {search.length > 0 && (
+        <div className="flex items-center justify-center">
+          <Table className="w-full">
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[150px]">State</TableHead>
+                <TableHead>Sigla</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {filteredStates.map((state) => (
+                <TableRow key={state.sigla}>
+                  <TableCell className="font-medium">{state.nome}</TableCell>
+                  <TableCell>{state.sigla}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      )}
+    </div>
   );
 }
